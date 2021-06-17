@@ -9,16 +9,15 @@
 <body>
 <?php 
    $check = "";
-    if(isset($_POST['Submit'])){  
-        
-        if(empty($_POST["number"]){
+    if(isset($_POST['Submit'])){   
+        if(!empty($_POST["number"])){
             $number = $_POST["number"]; 
-            if($number % 7 == 0)
-            echo "sô $number chia hết cho 7";
+            if($number % 7 == 0) echo "sô $number chia hết cho 7";
             else echo "số $number không chia hết cho 7";
-        }else echo = " nhap vao" ;       
-    }
+        }
+        else echo " nhap vao" ;       
     
+}
     ?>
     <form method="post">
     <input type="text" name="number">
