@@ -8,8 +8,44 @@
 </head>
 <body>
 <?php
-    $messerror = "";
+    $err_toan = "";
+    $err_ly = "";
+    $err_hoa = "";
+    $err_tiengAnh = "";
+    $err_van = "";
+    $err_lichSu = "";
     if(isset($_POST['Submit'])){  
+        
+        if(!empty($_POST['toan'])){
+            $err_toan = "";       
+        }else {
+            $err_toan = "vui long nhap diem toan" ;
+        }
+        if(empty($_POST['ly'])){
+            $err_ly = "vui long nhap diem ly" ;
+        }else {
+            $err_ly = "";
+        }
+        if(empty($_POST['hoa'])){
+            $err_hoa = "vui long nhap diem hoa";
+        }else {
+            $err_hoa = "";
+        }
+        if(empty($_POST['tiengAnh'])){
+            $err_tiengAnh = "vui long nhap diem tieng Anh";
+        }else {
+            $err_tiengAnh = "";
+        }
+        if(empty($_POST['van'])){
+            $err_van = "vui long nhap diem van";
+        }else {
+            $err_van = "";
+        }
+        if(empty($_POST['lichSu'])){
+            $err_lichSu = "vui long nhap diem lich Su";
+        }else {
+            $err_lichSu = "";
+        }
         if(!empty($_POST['toan']) && !empty($_POST['ly']) && !empty($_POST['hoa']) && !empty($_POST['tiengAnh'])&& !empty($_POST['van'])&& !empty($_POST['lichSu'])){
             $messerror = "";
             $toan = $_POST["toan"];
@@ -41,25 +77,25 @@
                 }
             }
             
-            
-        }else{
-            $messerror = "nhập vào !";
-        }
         
         
     }
+}
 ?>
 <form method="post">
-    <input type="text" name="toan">   
+    <input type="text" name="toan">  
+    <p><?php echo $err_toan; ?></p> 
     <input type="text" name="ly">
+    <p><?php echo $err_ly; ?></p>
     <input type="text" name="hoa">
-    <input type="text" name="tiengAnh">   
+    <p><?php echo $err_hoa; ?></p>
+    <input type="text" name="tiengAnh">  
+    <p><?php echo $err_tiengAnh; ?></p> 
     <input type="text" name="van">
+    <p><?php echo $err_van; ?></p>
     <input type="text" name="lichSu">
+    <p><?php echo $err_lichSu; ?></p>
     <button name="Submit">Submit</button>
-    <?php
-       echo $messerror;
-    ?>
     </form>
 
 
