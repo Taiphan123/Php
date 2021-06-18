@@ -29,13 +29,13 @@
         }else {
             $err_hoa = "";
         }
-        if(!empty($_POST['toan'])&&!empty($_POST['toan'])&&!empty($_POST['toan'])){
+        if(!empty($_POST['toan'])&&!empty($_POST['ly'])&&!empty($_POST['hoa'])){
             $toan = $_POST["toan"];
             $ly = $_POST["ly"];
             $hoa = $_POST["hoa"];
             $total = $toan+$ly+$hoa;
             if( $toan == 1 || $ly == 1 || $hoa == 1){
-                        $mess = "rớt";
+                $mess = "rớt";
             }else{
                 if( $total >=15 ){
                     $mess = "đậu";
