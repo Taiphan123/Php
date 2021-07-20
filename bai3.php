@@ -14,46 +14,46 @@
     $err_tiengAnh = "";
     $err_van = "";
     $err_lichSu = "";
+    
     if(isset($_POST['Submit'])){  
-        
-        if(!empty($_POST['toan'])){
+        $toan = $_POST["toan"];
+        $ly = $_POST["ly"];
+        $hoa = $_POST["hoa"];
+        $tiengAnh = $_POST["tiengAnh"];
+        $van = $_POST["van"];
+        $lichSu = $_POST["lichSu"];
+        if(!empty($toan)){
             $err_toan = "";       
         }else {
             $err_toan = "vui long nhap diem toan" ;
         }
-        if(empty($_POST['ly'])){
+        if(empty($ly)){
             $err_ly = "vui long nhap diem ly" ;
         }else {
             $err_ly = "";
         }
-        if(empty($_POST['hoa'])){
+        if(empty($hoa)){
             $err_hoa = "vui long nhap diem hoa";
         }else {
             $err_hoa = "";
         }
-        if(empty($_POST['tiengAnh'])){
+        if(empty($tiengAnh)){
             $err_tiengAnh = "vui long nhap diem tieng Anh";
         }else {
             $err_tiengAnh = "";
         }
-        if(empty($_POST['van'])){
+        if(empty($van)){
             $err_van = "vui long nhap diem van";
         }else {
             $err_van = "";
         }
-        if(empty($_POST['lichSu'])){
+        if(empty($lichSu)){
             $err_lichSu = "vui long nhap diem lich Su";
         }else {
             $err_lichSu = "";
         }
-        if(!empty($_POST['toan']) && !empty($_POST['ly']) && !empty($_POST['hoa']) && !empty($_POST['tiengAnh'])&& !empty($_POST['van'])&& !empty($_POST['lichSu'])){
+        if(!empty($toan) && !empty($ly) && !empty($hoa) && !empty($tiengAnh)&& !empty($van)&& !empty($lichSu)){
             $messerror = "";
-            $toan = $_POST["toan"];
-            $ly = $_POST["ly"];
-            $hoa = $_POST["hoa"];
-            $tiengAnh = $_POST["tiengAnh"];
-            $van = $_POST["van"];
-            $lichSu = $_POST["lichSu"];
             $total = ($toan+$ly+$hoa+$tiengAnh+$van+$lichSu)/6;
             if($toan>10||$ly>10||$hoa>10||$tiengAnh>10||$van>10||$lichSu>10){
                 echo "điểm dưới 10";
