@@ -13,7 +13,7 @@
     $err_hoa = "";
     $err_tiengAnh = "";
     $err_van = "";
-    $err_lichSu = "";
+    $err_lichSu = ""; 
     
     if(isset($_POST['Submit'])){  
         $toan = $_POST["toan"];
