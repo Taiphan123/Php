@@ -14,10 +14,10 @@
 	$data = [];
 	if ($result->num_rows > 0) {
 
-	//Gắn dữ liệu lấy được vào mảng $data
-	while ($row = $result->fetch_assoc()) {
-	$data[] = $row;
-	}
+		//Gắn dữ liệu lấy được vào mảng $data
+		while ($row = $result->fetch_assoc()) {
+			$data[] = $row;
+		}
 	}
 
 	$html = '';

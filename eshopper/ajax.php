@@ -7,24 +7,22 @@
 	//Chạy câu SQL
    // echo $sql;
 	$result = $con->query($sql);
-	$data = [];
+	$data = "";
 	if ($result->num_rows > 0) {
 	  while ($row = $result->fetch_assoc()) {
-	    $data[] = $row;
+	    $data = $row;
 	  }
 	}
-  $data1;
- 
-    foreach ($data as $value) {
+   
       $data1 = [
-        "id"=> $value['id'],
-        "image" => $value['images'],
-        "price" => $value['price'],
-        "item" => $value['item'],
+        "id"=> $data['id'],
+        "image" => $data['images'],
+        "price" => $data['price'],
+        "item" => $data['item'],
         "count" => 1
       ];
-    }
-    if($_SESSION['cart'][$id]["id"]==$data1["id"]){
+   
+    if($_SESSION['cart'][$id]["id"] == $data1["id"]){
       $_SESSION['cart'][$id]["count"]++;
     }else{
       $_SESSION['cart'][$id] = $data1;

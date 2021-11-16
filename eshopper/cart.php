@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,48 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+			var Total = 0;
+			$("a.cart_quantity_up").click(function(){
+				var id = $(this).closest("tr").attr("id");
+				var a = parseInt($(this).closest(".cart_quantity_button").find("input").val());
+				$(this).closest(".cart_quantity_button").find("input").val(a+1);
+				var price = $(this).closest("tr").find(".cart_price").text().match(/\d/g);
+				price = price.join("");
+				$(this).closest("tr").find(".cart_total_price").text(price * (a+1));
+				console.log(price);
+				Total += parseInt(price);
+				$(".total_area").find("#Total").text("$" + Total);
+			});
 
+			$("a.cart_quantity_down").click(function(){
+				var id = $(this).closest("tr").attr("id");
+				var a = parseInt($(this).closest(".cart_quantity_button").find("input").val());
+				$(this).closest(".cart_quantity_button").find("input").val(a-1);
+				var price = $(this).closest("tr").find(".cart_price").text().match(/\d/g);
+				price = price.join("");
+				if(a==1){
+					$("#" + id).remove();
+				}else $(this).closest("tr").find(".cart_total_price").text("$"+price * (a-1));
+				Total -= parseInt(price);
+				$(".total_area").find("#Total").text("$" + Total);
+				//console.log($b);
+				
+			});
+
+			$("a.cart_quantity_delete").click(function(){
+				var id = $(this).closest("tr").attr("id");
+				var price = $(this).closest("tr").find(".cart_total_price").text().match(/\d/g);
+				price = price.join("");
+				Total=Total-price;
+				$("#" + id).remove();
+				//console.log($b);
+				$(".total_area").find("#Total").text("$" + Total);
+			});
+		});	
+</script>
 <body>
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
@@ -241,7 +283,7 @@
 							<li>Cart Sub Total <span>$59</span></li>
 							<li>Eco Tax <span>$2</span></li>
 							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span>$61</span></li>
+							<li>Total <span id="Total"> 56</span></li>
 						</ul>
 							<a class="btn btn-default update" href="">Update</a>
 							<a class="btn btn-default check_out" href="">Check Out</a>
