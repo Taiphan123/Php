@@ -27,17 +27,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-			var Total = 0;
+			var Total = parseInt($(".total_area").find("#Total").text().match(/\d/g).join(""));
+			
 			$("a.cart_quantity_up").click(function(){
 				var id = $(this).closest("tr").attr("id");
 				var a = parseInt($(this).closest(".cart_quantity_button").find("input").val());
 				$(this).closest(".cart_quantity_button").find("input").val(a+1);
 				var price = $(this).closest("tr").find(".cart_price").text().match(/\d/g);
 				price = price.join("");
-				$(this).closest("tr").find(".cart_total_price").text(price * (a+1));
-				console.log(price);
+				if(a==1){
+					$("#" + id).remove();
+				}else $(this).closest("tr").find(".cart_total_price").text("$"+price * (a+1));
 				Total += parseInt(price);
 				$(".total_area").find("#Total").text("$" + Total);
+				
+				// gửi sang file ajax
+				$.ajax({
+					method: "POST",
+					url: "ajax.php",
+					data: {
+						tai1: id
+					},
+					success : function(response){
+						console.log(response);
+					}
+				});
+
 			});
 
 			$("a.cart_quantity_down").click(function(){
@@ -51,7 +66,17 @@
 				}else $(this).closest("tr").find(".cart_total_price").text("$"+price * (a-1));
 				Total -= parseInt(price);
 				$(".total_area").find("#Total").text("$" + Total);
-				//console.log($b);
+				// gửi sang file ajax
+				$.ajax({
+					method: "POST",
+					url: "ajax.php",
+					data: {
+						tai2: id
+					},
+					success : function(response){
+						console.log(response);
+					}
+				});
 				
 			});
 
@@ -63,6 +88,16 @@
 				$("#" + id).remove();
 				//console.log($b);
 				$(".total_area").find("#Total").text("$" + Total);
+				$.ajax({
+					method: "POST",
+					url: "ajax.php",
+					data: {
+						tai3: id
+					},
+					success : function(response){
+						console.log(response);
+					}
+				});
 			});
 		});	
 </script>
@@ -283,7 +318,7 @@
 							<li>Cart Sub Total <span>$59</span></li>
 							<li>Eco Tax <span>$2</span></li>
 							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span id="Total"> 56</span></li>
+							<li>Total <span id="Total"> <?php echo $_SESSION["total"]*59 ?></span></li>
 						</ul>
 							<a class="btn btn-default update" href="">Update</a>
 							<a class="btn btn-default check_out" href="">Check Out</a>

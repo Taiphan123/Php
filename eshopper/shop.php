@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +27,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+			var a;
 			$("a").click(function(){
 				var id = $(this).attr("id");
 				$.ajax({
@@ -35,9 +37,14 @@
 						tai: id
 					},
 					success : function(response){
-						console.log(response);
+						//console.log(response);
 					}
 				});
+				a = $("#total").text().match(/\d/g);
+				a = a.join("");
+				console.log(a);
+				var b = parseInt(a)+1;
+				$("#total").text("Cart"+b);
 			});
 		});	
 </script>
@@ -106,7 +113,7 @@
 								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="cart.html" id="total"><i class="fa fa-shopping-cart"></i>  <?php echo "Cart".$_SESSION['total']; ?></a></li>
 								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>

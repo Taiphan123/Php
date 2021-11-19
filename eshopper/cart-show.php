@@ -1,6 +1,10 @@
 <?php 
+//	error_reporting(0);
 	//Kết nối databse
 	$html = '';
+	$a=0;
+	echo "<pre>";
+	var_dump($_SESSION['cart']);
 	foreach ($_SESSION['cart'] as $key) {	 
 	$html .= '
 	<tr id="'.$key['id'].'">
@@ -28,5 +32,7 @@
 			<a class="cart_quantity_delete" ><i class="fa fa-times"></i></a>
 		</td>
 	</tr>';
+	$a+=$key['count'];
 }
+$_SESSION['total'] =$a;
 ?>
